@@ -12,9 +12,9 @@ const Pagina404 = () => (<div>Página 404</div>)
 ReactDOM.render(
    <BrowserRouter>
       <Switch>
-         <Route path="/cadastro/video" component={CadastroVideo} exact />
-         <Route path="/cadastro/categoria" component={CadastroCategoria} exact />
          <Route path="/" component={Home} exact />
+         <Route path="/cadastro/video" component={CadastroVideo} />
+         <Route path="/cadastro/categoria" component={CadastroCategoria} />
          <Route component={Pagina404} />  {/* Se não encontrar nenhuma rota, então mostra isso. */}
       </Switch>
    </BrowserRouter>,

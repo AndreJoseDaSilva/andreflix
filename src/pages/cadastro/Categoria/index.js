@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
+import useForm from '../../../hooks/useForm';
+
 
 function CadastroCategoria() {
   const valoresIniciais = {
@@ -11,25 +13,9 @@ function CadastroCategoria() {
     cor: '#FFFFFF',
   };
 
-  // Aqui abaixo pode ser const [valores, setValores]
-  const [values, setValues] = useState(valoresIniciais);
+  const { handleChange, values, clearForm } = useForm( valoresIniciais );
+
   const [categorias, setCategorias] = useState([]);
-
-  // Essa função foi criada para receber a Chave e o valor dinamico, por uqe é usada nos 3 componentes do formulario.
-  function setValue(chave, valor) {
-    // chave: nome, descricao, bla, bli
-    setValues({
-      ...values,
-      [chave]: valor, // nome: 'valor'
-    });
-  }
-
-  function handleChange(infosDoEvento) {
-    setValue(
-      infosDoEvento.target.getAttribute('name'),
-      infosDoEvento.target.value,
-    );
-  }
 
 /* 
    Executa como efeito colateral. 
@@ -70,7 +56,8 @@ function CadastroCategoria() {
           ...categorias, // Esses 3 pontinhos indicam que as informações de categorias se mantém.
           values, // E aqui inclui o novo valor
         ]);
-        setValues(valoresIniciais);
+        
+        clearForm();
       }}
       >
 
@@ -113,7 +100,7 @@ function CadastroCategoria() {
       <ul>
         {categorias.map((categoria, indice) => (
           <li key={`${categoria}${indice}`}>
-            {categoria.nome}
+            {categoria.titulo}
           </li>
         ))}
       </ul>
